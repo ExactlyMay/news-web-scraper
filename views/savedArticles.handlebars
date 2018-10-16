@@ -1,0 +1,77 @@
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="display-4 text-center">The New York Times</h1>
+    <p class="lead text-center text-info"><strong>Saved Articles</strong></p>
+    <p class="text-center">Click "Add Notes" to take notes on the articles you saved.</p>
+    <hr class="my-4">
+    <p class="lead text-right">
+        <a href="/"><button type="button" class="btn btn-primary btn-lg">Home</button></a>
+    </p>
+  </div>
+</div>
+
+
+<div class="container">
+
+  {{#each articles}}
+    {{#if saved}}
+      <div class="card border-secondary mb-3">
+        <a href="{{storyUrl}}" target="_blank">
+          <img class="card-img-top" src="{{imgUrl}}" alt="">
+        </a>
+        <div class="card-body">
+          {{#if storyUrl}}
+            <a href="{{storyUrl}}" target="_blank">
+              <h3 class="card-title">{{headline}}</h3>
+            </a>
+          {{else}}
+            <h3 class="card-title">{{headline}}</h3>
+          {{/if}}
+          <h4 class="text-uppercase">{{byLine}}</h4>
+          <h5 class="">{{summary}}</h5>
+          <button type="button" class="btn btn-success addNote storyButton" data-id="{{_id}}">Add Note</button>
+          <button type="button" class="btn btn-danger deleteArticle storyButton" data-id="{{_id}}">Delete Article</button>
+        </div>
+      </div>
+   {{/if}}
+  {{/each}} 
+  
+</div>
+
+
+<div id="noteModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title text-center">Add a Note</h4>
+      </div>
+      <div class="modal-body">
+        <div class="input-group input-group-lg mb-3 noteInput">
+          <input type="text" id="noteTitleEntry" placeholder="Enter Title">
+        </div>
+        <div class="input-group input-group-lg mb-3 noteInput">
+          <input type="text" id="noteBodyEntry" placeholder="Enter Body">
+        </div>
+        <div id="noteArea"></div>
+      </div>
+      <div class="modal-footer">
+        <h5 class="text-left">Click the note to read it, or X to delete</h5>
+        <button type="button" id="submitNote" class="btn btn-primary">Save Note</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="error" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h2 class="text-danger">There was an error processing your request. Please try again later.</h2>
+      </div>
+    </div>
+  </div>
+</div>
